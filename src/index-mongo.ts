@@ -10,7 +10,7 @@ app
 
 app.get('/estudantes' , async (req: Request, res: Response) => {
     const estudantes = await db.collection('estudantes').find().toArray();
-    res.send(process.env.DBUSER);
+    res.status(200).json(estudantes);
 });
 
 app.listen(8000, () => {

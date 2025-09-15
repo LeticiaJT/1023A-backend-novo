@@ -1,8 +1,8 @@
 import 'dotenv/config'
 import mysql from 'mysql2/promise';
-console.log(process.env.DBUSEnpR);
+console.log(process.env.DBUSER);
 
-import express, { Request, Response } from 'express'
+import express, { Request, Response } from 'express';
 const app = express();
 
 app.get('/', async (req:Request , res: Response) => {
@@ -42,24 +42,7 @@ app.get('/', async (req:Request , res: Response) => {
     }
 });
 
-// Rota GET para listar produtos
-app.get('/produtos', async (req: Request, res: Response) => {
-    try {
-        const connection = await mysql.createConnection({
-            host: process.env.DBHOST!,
-            user: process.env.DBUSER!,
-            password: process.env.DBPASSWORD!,
-            database: process.env.DBNAME!,
-            port: Number(process.env.DBPORT!)
-        });
-        const [rows] = await connection.query('SELECT * FROM produtos');
-        await connection.end();
-        res.json(rows);
-    } catch (error: any) {
-        res.status(500).json({ erro: 'Erro ao buscar produtos', detalhe: error.message || error });
-    }
-});
- 7
+
 app.listen(8000, () => {
     console.log('Server is running on port 8000');
-});
+})
